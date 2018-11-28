@@ -10,10 +10,13 @@ export class MoviesList extends Component {
   render() {
     const { movies } = this.props
     return (
-      <div className="MoviesList">
+      <div className="columns is-multiline">
         {movies.map(movie => {
           return (
-            <div key={movie.imdbID} className="MoviesList-item">
+            <div
+              key={movie.imdbID}
+              className="column is-full-mobile is-one-third-tablet is-one-quarter-desktop is-one-quarter-widescreen is-one-quarter-fullhd"
+            >
               <Movie
                 title={movie.Title}
                 type={movie.Type}
