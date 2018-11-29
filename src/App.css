@@ -1,6 +1,12 @@
 .App {
   padding-top: 36px;
   text-align: center;
+  background-color: black;
+}
+
+body {
+  background-color: black;
+  height: 100vh;
 }
 
 .SearchForm-wrapper {
@@ -8,10 +14,36 @@
   justify-content: center;
 }
 
-.columns {
+.buttons-wrapper {
+  justify-content: center !important;
+}
+.buttons-wrapper .is-half {
+  width: 48%;
+}
+.buttons-wrapper .is-half button {
+  width: 100%;
+}
+
+#moviesList .columns {
   padding: 24px;
 }
 
-.column img {
+img {
   border-radius: 5%;
+}
+.title,
+.subtitle,
+body {
+  color: #fff !important;
+}
+
+.disabledLast {
+  display: none !important;
+}
+.disabledFirst {
+  display: none !important;
+}
+
+nav {
+  margin-top: 30px !important;
 }
