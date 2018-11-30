@@ -42,16 +42,109 @@ export class Detail extends Component {
   }
 
   render() {
-    const { Title, Poster, Actors, Genre, Plot, imdbRating } = this.state.movie
+    const {
+      Title,
+      Poster,
+      Director,
+      Actors,
+      Production,
+      Genre,
+      Plot,
+      imdbRating,
+      Year,
+      Country,
+      Runtime,
+      Type,
+      Website,
+      Awards
+    } = this.state.movie
     return (
       <div>
-        <ButtonBackToHome />
-        <p className="title">{Title}</p>
-        <img src={Poster} alt={Title} />
-        <h3>{Actors}</h3>
-        <span>{imdbRating}</span>
-        <p>{Genre}</p>
-        <p>{Plot}</p>
+        <section class="hero bottomMargin24">
+          <div class="hero-body">
+            <div class="container">
+              <h1 class="title">{Title}</h1>
+              <h2 class="subtitle">
+                <div>
+                  <span className="tag is-warning rating">
+                    <i className="fas fa-star icon" />
+                    <span>{imdbRating}</span>
+                  </span>
+                </div>
+              </h2>
+            </div>
+          </div>
+        </section>
+        <div className="tile is-ancestor">
+          <div className="tile is-vertical is-8">
+            <div className="tile">
+              <div className="tile is-parent is-vertical">
+                <article className="tile is-child notification is-primary">
+                  <p className="subtitle">
+                    {Year} - {Country}
+                  </p>
+                  <p className="subtitle">{Runtime}</p>
+                </article>
+                <article className="tile is-child notification is-info">
+                  <p className="subtitle">{Genre}</p>
+                </article>
+                <article className="tile is-child notification is-warning">
+                  <p className="subtitle">{Awards}</p>
+                </article>
+              </div>
+              <div className="tile is-parent">
+                <article className="tile is-child notification is-black">
+                  <figure className="image is-4by3">
+                    <img src={Poster} alt={Title} />>
+                  </figure>
+                </article>
+              </div>
+            </div>
+            <div className="tile is-parent">
+              <article className="tile is-child notification is-danger">
+                <div className="content">
+                  <p className="title" />
+                  <p className="subtitle">{Plot}</p>
+                  <div className="content" />
+                </div>
+                <div className="content" />
+              </article>
+            </div>
+          </div>
+          <div className="tile is-parent is-vertical">
+            <article className="tile is-child notification is-success">
+              <p className="title">Director</p>
+              <p className="subtitle">{Director}</p>
+            </article>
+            <article className="tile is-child notification is-dark">
+              <p className="title">Actors</p>
+              <p className="subtitle">{Actors}</p>
+            </article>
+
+            {/* <article className="tile is-child notification is-info">
+              <p className="subtitle">{Genre}</p>
+            </article> */}
+            <article className="tile is-child notification is-link ">
+              <p className="title" />
+              <p className="subtitle">{Production}</p>
+              <p className="subtitle">
+                <a href={`${Website}`} target="_blank">
+                  {Website}
+                </a>
+              </p>
+            </article>
+          </div>
+        </div>
+        {/* <div className="backInDetail">
+          <ButtonBackToHome />
+        </div> */}
+        <footer class="footer footerDetail">
+          <div class="content has-text-centered">
+            <p>
+              <ButtonBackToHome />
+            </p>
+          </div>
+        </footer>
       </div>
     )
   }

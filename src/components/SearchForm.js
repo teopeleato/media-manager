@@ -9,7 +9,17 @@ export class SearchForm extends Component {
     pageNumber: 1,
     totalPages: 0,
     Search: [],
-    arrayNum: [0, 0, 1]
+    arrayNum: [0, 0, 1],
+    disablePagination: "disablePagination",
+    placeholder: ""
+  }
+
+  componentWillMount = () => {
+    // const { placeholder } = this.props
+    const placeholder = "vamooooooooooooooos"
+    if (placeholder) {
+      this.setState({ placeholder })
+    }
   }
 
   _handleChange = e => {
@@ -43,18 +53,25 @@ export class SearchForm extends Component {
         window.sessionStorage.setItem("placeholder", inputMovie)
         window.sessionStorage.setItem("pageNumber", pageNumber)
         window.sessionStorage.setItem("totalPages", paginas)
-        this.setState({ pageNumber, totalPages: paginas })
+        this.setState({
+          pageNumber,
+          totalPages: paginas,
+          disablePagination: ""
+        })
       })
   }
 
   _clear = e => {
     e.preventDefault()
     const Search = []
-    const inputMovie = "teo"
     this.props.onResults(Search)
     // esto nuevo para cambiar el placeholder con la busqueda anterior...
     window.sessionStorage.setItem("sessionMovies", JSON.stringify(Search))
-    this.setState({ placeholder: inputMovie })
+    window.sessionStorage.setItem("placeholder", "Text to search 22...")
+    this.setState({
+      disablePagination: "disablePagination",
+      placeholder: "Text to search 11..." //tras pasar por Detail
+    })
   }
 
   _callToApi(inputMovie, type, newPage) {
@@ -77,7 +94,11 @@ export class SearchForm extends Component {
         window.sessionStorage.setItem("placeholder", inputMovie)
         window.sessionStorage.setItem("pageNumber", newPage)
         window.sessionStorage.setItem("totalPages", paginas)
-        this.setState({ pageNumber: newPage, totalPages: paginas })
+        this.setState({
+          pageNumber: newPage,
+          totalPages: paginas,
+          disablePagination: ""
+        })
       })
   }
 
@@ -124,83 +145,20 @@ export class SearchForm extends Component {
     return (
       <div className="container2">
         <form onSubmit={this._handleSubmit}>
-          {/* <div class="field is-horizontal">
-            <div class="field-label is-normal">
-              <label class="label">Texto a buscar</label>
-            </div>
-            <div className="field-body">
-              <div className="filed">
-                <div className="control">
-                  <input
-                    className="input"
-                    type="text"
-                    placeholder={this.props.placeholder}
-                    onChange={this._handleChange}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="field is-horizontal">
-            <div class="field-label is-normal">
-              <label class="label">Tipo</label>
-            </div>
-            <div className="field-body">
-              <div className="filed">
-                <div className="control">
-                  <div className="select is-full">
-                    <select onChange={this._handleChangeType}>
-                      <option value="">All</option>
-                      <option value="movie">Films</option>
-                      <option value="series">Series</option>
-                      <option value="episode">Episode</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="SearchForm-wrapper">
-            <div class="field is-horizontal">
-              <div class="field-label" />
-              <div class="field-body">
-                <div className="field is-grouped">
-                  <div className="control">
-                    <button
-                      className="button is-success is-outlined"
-                      disabled={!this.state.inputMovie}
-                    >
-                      Search
-                    </button>
-                  </div>
-                  <div className="control">
-                    <button
-                      className="button is-danger is-outlined"
-                      onClick={this._clear}
-                    >
-                      <span>Delete</span>
-                      <span class="icon is-small">
-                        <i class="fas fa-times" />
-                      </span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> */}
-
+          {/* Text imput for TEXT TO SEARCH  */}
           <div className="field">
             <div className="control">
               <input
                 className="input"
                 type="text"
-                placeholder={this.props.placeholder}
                 onChange={this._handleChange}
+                placeholder={this.props.placeholder}
               />
             </div>
           </div>
 
-          <div class="field">
+          {/* Select for TYPE  */}
+          <div className="field">
             <div className="control">
               <div className="select is-full">
                 <select onChange={this._handleChangeType}>
@@ -213,7 +171,8 @@ export class SearchForm extends Component {
             </div>
           </div>
 
-          <div class="field is-grouped buttons-wrapper">
+          <div className="field is-grouped buttons-wrapper">
+            {/* Button to SEARCH  */}
             <div className="control is-half">
               <button
                 className="button is-success is-outlined"
@@ -222,6 +181,8 @@ export class SearchForm extends Component {
                 Search
               </button>
             </div>
+
+            {/* Button to DELETE  */}
             <div className="control is-half">
               <button
                 className="button is-danger is-outlined"
@@ -234,7 +195,9 @@ export class SearchForm extends Component {
         </form>
 
         <nav
-          className="pagination is-centered is-small"
+          className={`pagination is-centered is-small ${
+            this.state.disablePagination
+          }`}
           role="navigation"
           aria-label="pagination"
         >

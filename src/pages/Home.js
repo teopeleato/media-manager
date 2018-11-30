@@ -47,6 +47,10 @@ export class Home extends Component {
       this._renderResults()
     } else {
       window.sessionStorage.setItem("sessionMovies", [])
+      // window.sessionStorage.setItem("placeholder", "Text to search 33...")
+      /* this.setState({
+        placeholder: "Text to search 33..."
+      }) */
     }
   }
 
