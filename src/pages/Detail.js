@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { PropTypes } from "prop-types"
 import { ButtonBackToHome } from "./../components/ButtonBackToHome"
+import imgDefault from "../assets/img-default.png"
 
 const API_KEY = "28b20f8"
 
@@ -15,7 +16,8 @@ export class Detail extends Component {
       isExact: PropTypes.bool,
       path: PropTypes.string,
       url: PropTypes.string
-    })
+    }),
+    defaultPlot: PropTypes.string
   }
 
   state = {
@@ -42,29 +44,35 @@ export class Detail extends Component {
   }
 
   render() {
-    const {
+    let {
       Title,
-      Poster,
-      Director,
-      Actors,
-      Production,
+      Poster = "N/A",
+      Director = "N/A",
+      Actors = "N/A",
+      Production = "N/A",
       Genre,
-      Plot,
+      Plot = "N/A",
       imdbRating,
-      Year,
-      Country,
-      Runtime,
-      Type,
-      Website,
-      Awards
+      Year = "N/A",
+      Country = "N/A",
+      Runtime = "N/A",
+      Type = "N/A",
+      Website = "N/A",
+      Awards = "N/A"
     } = this.state.movie
+
+    console.log(this.props.defaultPlot)
+    if (Poster === "N/A") {
+      Poster = this.props.defaultPlot
+    }
+
     return (
       <div>
-        <section class="hero bottomMargin24">
-          <div class="hero-body">
-            <div class="container">
-              <h1 class="title">{Title}</h1>
-              <h2 class="subtitle">
+        <section className="hero bottomMargin24">
+          <div className="hero-body">
+            <div className="container">
+              <h1 className="title">{Title}</h1>
+              <h2 className="subtitle">
                 <div>
                   <span className="tag is-warning rating">
                     <i className="fas fa-star icon" />
@@ -138,8 +146,8 @@ export class Detail extends Component {
         {/* <div className="backInDetail">
           <ButtonBackToHome />
         </div> */}
-        <footer class="footer footerDetail">
-          <div class="content has-text-centered">
+        <footer className="footer footerDetail">
+          <div className="content has-text-centered">
             <p>
               <ButtonBackToHome />
             </p>
@@ -148,6 +156,10 @@ export class Detail extends Component {
       </div>
     )
   }
+}
+
+Detail.defaultProps = {
+  defaultPlot: imgDefault
 }
 
 export default Detail
