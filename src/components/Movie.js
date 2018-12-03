@@ -39,7 +39,25 @@ export class Movie extends Component {
             <div className="media-content">
               <p className="title is-4">{title}</p>
               <p className="subtitle is-6">{year}</p>
-              <button className="button is-info is-outlined is-small icon-left icon-top">
+              <button
+                className="button is-info is-outlined is-small icon-left"
+                title="Show details"
+              >
+                <i className="fas fa-info-circle" />
+              </button>
+              <button
+                className="button is-warning is-outlined is-small icon-left"
+                title="Add to wishlist"
+              >
+                <i className="far fa-eye" />
+              </button>
+              <button
+                className="button is-success is-outlined is-small icon-left"
+                title="Mark as seen"
+              >
+                <i className="fas fa-check" />
+              </button>
+              {/* <button className="button is-info is-outlined is-small icon-left icon-top">
                 <i className="fas fa-info-circle icon-left" /> Details
               </button>
               <button className="button is-warning is-outlined is-small icon-left icon-top">
@@ -47,7 +65,7 @@ export class Movie extends Component {
               </button>
               <button className="button is-success is-outlined is-small icon-left icon-top">
                 <i className="fas fa-check icon-left" /> Seen
-              </button>
+              </button> */}
             </div>
           </div>
         </div>

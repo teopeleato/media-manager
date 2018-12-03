@@ -29,7 +29,7 @@ export class Detail extends Component {
       .then(response => response.json())
       .then(movie => {
         this.setState({ movie })
-        console.log(this.state.movie)
+        // console.log(this.state.movie)
       })
   }
 
@@ -38,7 +38,6 @@ export class Detail extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props)
     const { id } = this.props.match.params
     this._fetchMovie({ id })
   }
@@ -61,7 +60,6 @@ export class Detail extends Component {
       Awards = "N/A"
     } = this.state.movie
 
-    console.log(this.props.defaultPlot)
     if (Poster === "N/A") {
       Poster = this.props.defaultPlot
     }
@@ -72,14 +70,29 @@ export class Detail extends Component {
           <div className="hero-body">
             <div className="container">
               <h1 className="title">{Title}</h1>
-              <h2 className="subtitle">
-                <div>
-                  <span className="tag is-warning rating">
-                    <i className="fas fa-star icon" />
-                    <span>{imdbRating}</span>
-                  </span>
-                </div>
-              </h2>
+              {/* <span className="tag is-warning rating">
+                <i className="fas fa-star icon" />
+                <span>{imdbRating}</span>
+              </span> */}
+              <button
+                className="button is-info  is-medium icon-left"
+                title="IMDB rating"
+              >
+                <i className="fas fa-star icon-left" />
+                <span>{imdbRating}</span>
+              </button>
+              <button
+                className="button is-warning is-outlined is-medium icon-left"
+                title="Add to wishlist"
+              >
+                <i className="far fa-eye" />
+              </button>
+              <button
+                className="button is-success is-outlined is-medium icon-left"
+                title="Mark as seen"
+              >
+                <i className="fas fa-check" />
+              </button>
             </div>
           </div>
         </section>
@@ -87,49 +100,47 @@ export class Detail extends Component {
           <div className="tile is-vertical is-8">
             <div className="tile">
               <div className="tile is-parent is-vertical">
-                <article className="tile is-child notification is-primary align-left">
-                  <div>
-                    <p className="subtitle">
-                      <i className="far fa-calendar-alt" /> {Year}
-                    </p>
-                    <p className="subtitle">
-                      <i class="fas fa-globe-americas" /> {Country}
-                    </p>
-                    <p className="subtitle">
-                      <i class="far fa-clock" /> {Runtime}
-                    </p>
-                  </div>
-                </article>
-                <article className="tile is-child notification is-info">
-                  <div>
-                    <p className="subtitle">
-                      <i class="fas fa-video" /> {Type}
-                    </p>
-                    <p className="subtitle">
-                      <i class="fas fa-theater-masks" /> {Genre}
-                    </p>
-                  </div>
-                </article>
-                <article className="tile is-child notification is-warning">
-                  <p className="subtitle">
-                    <i class="fas fa-award" /> {Awards}
-                  </p>
-                </article>
-              </div>
-              <div className="tile is-parent">
                 <article className="tile is-child notification img-detail">
-                  {/* <a class="card" href="/detail/tt0372784"> */}
                   <div className="card-image">
                     <figure className="image">
                       <img src={Poster} alt={Title} />
                     </figure>
                   </div>
-                  {/* </a> */}
+                </article>
+              </div>
+              <div className="tile is-parent is-vertical">
+                <article className="tile is-child notification grid-detail-block is-primary align-left">
+                  <div>
+                    <p className="subtitle">
+                      <i className="far fa-calendar-alt" /> {Year}
+                    </p>
+                    <p className="subtitle">
+                      <i className="fas fa-globe-americas" /> {Country}
+                    </p>
+                    <p className="subtitle">
+                      <i className="far fa-clock" /> {Runtime}
+                    </p>
+                  </div>
+                </article>
+                <article className="tile is-child notification grid-detail-block is-info">
+                  <div>
+                    <p className="subtitle">
+                      <i className="fas fa-video" /> {Type}
+                    </p>
+                    <p className="subtitle">
+                      <i className="fas fa-theater-masks" /> {Genre}
+                    </p>
+                  </div>
+                </article>
+                <article className="tile is-child notification grid-detail-block is-warning">
+                  <p className="subtitle">
+                    <i className="fas fa-award" /> {Awards}
+                  </p>
                 </article>
               </div>
             </div>
             <div className="tile is-parent">
-              <article className="tile is-child notification is-danger">
+              <article className="tile is-child notification grid-detail-block is-danger">
                 <div className="content">
                   <p className="title" />
                   <p className="subtitle">{Plot}</p>
@@ -140,13 +151,13 @@ export class Detail extends Component {
             </div>
           </div>
           <div className="tile is-parent is-vertical">
-            <article className="tile is-child notification is-success">
+            <article className="tile is-child notification grid-detail-block is-success">
               <div>
                 <p className="title">Director</p>
                 <p className="subtitle">{Director}</p>
               </div>
             </article>
-            <article className="tile is-child notification is-dark">
+            <article className="tile is-child notification grid-detail-block is-dark">
               <div>
                 <p className="title">Actors</p>
                 <p className="subtitle">{Actors}</p>
@@ -156,12 +167,16 @@ export class Detail extends Component {
             {/* <article className="tile is-child notification is-info">
               <p className="subtitle">{Genre}</p>
             </article> */}
-            <article className="tile is-child notification is-link ">
+            <article className="tile is-child notification grid-detail-block is-link ">
               <div>
                 <p className="title" />
                 <p className="subtitle">{Production}</p>
                 <p className="subtitle">
-                  <a href={`${Website}`} target="_blank">
+                  <a
+                    href={`${Website}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     {Website}
                   </a>
                 </p>
@@ -174,12 +189,6 @@ export class Detail extends Component {
           <div className="content has-text-centered">
             <p>
               <ButtonBackToHome />
-              <button className="button is-warning is-outlined is-medium icon-left icon-top">
-                <i class="far fa-eye icon-left" /> To see
-              </button>
-              <button className="button is-success is-outlined is-medium icon-left">
-                <i class="fas fa-check icon-left" /> Seen
-              </button>
             </p>
           </div>
         </footer>
