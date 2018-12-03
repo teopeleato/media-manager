@@ -11,7 +11,7 @@ export class MoviesList extends Component {
     const { movies } = this.props
     return (
       <div id="moviesList">
-        <div className="columns is-multiline">
+        <div className="columns is-multiline is-mobile">
           {movies.map(movie => {
             return (
               <div

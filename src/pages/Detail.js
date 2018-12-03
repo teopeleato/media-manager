@@ -83,15 +83,17 @@ export class Detail extends Component {
             </div>
           </div>
         </section>
-        <div className="tile is-ancestor">
+        <div className="tile is-ancestor grid-detail">
           <div className="tile is-vertical is-8">
             <div className="tile">
               <div className="tile is-parent is-vertical">
                 <article className="tile is-child notification is-primary">
-                  <p className="subtitle">
-                    {Year} - {Country}
-                  </p>
-                  <p className="subtitle">{Runtime}</p>
+                  <div>
+                    <p className="subtitle">
+                      {Year} - {Country}
+                    </p>
+                    <p className="subtitle">{Runtime}</p>
+                  </div>
                 </article>
                 <article className="tile is-child notification is-info">
                   <p className="subtitle">{Genre}</p>
@@ -101,10 +103,14 @@ export class Detail extends Component {
                 </article>
               </div>
               <div className="tile is-parent">
-                <article className="tile is-child notification is-black">
-                  <figure className="image is-4by3">
-                    <img src={Poster} alt={Title} />>
-                  </figure>
+                <article className="tile is-child notification img-detail">
+                  {/* <a class="card" href="/detail/tt0372784"> */}
+                  <div class="card-image">
+                    <figure class="image">
+                      <img src={Poster} alt={Title} />
+                    </figure>
+                  </div>
+                  {/* </a> */}
                 </article>
               </div>
             </div>
@@ -121,31 +127,35 @@ export class Detail extends Component {
           </div>
           <div className="tile is-parent is-vertical">
             <article className="tile is-child notification is-success">
-              <p className="title">Director</p>
-              <p className="subtitle">{Director}</p>
+              <div>
+                <p className="title">Director</p>
+                <p className="subtitle">{Director}</p>
+              </div>
             </article>
             <article className="tile is-child notification is-dark">
-              <p className="title">Actors</p>
-              <p className="subtitle">{Actors}</p>
+              <div>
+                <p className="title">Actors</p>
+                <p className="subtitle">{Actors}</p>
+              </div>
             </article>
 
             {/* <article className="tile is-child notification is-info">
               <p className="subtitle">{Genre}</p>
             </article> */}
             <article className="tile is-child notification is-link ">
-              <p className="title" />
-              <p className="subtitle">{Production}</p>
-              <p className="subtitle">
-                <a href={`${Website}`} target="_blank">
-                  {Website}
-                </a>
-              </p>
+              <div>
+                <p className="title" />
+                <p className="subtitle">{Production}</p>
+                <p className="subtitle">
+                  <a href={`${Website}`} target="_blank">
+                    {Website}
+                  </a>
+                </p>
+              </div>
             </article>
           </div>
         </div>
-        {/* <div className="backInDetail">
-          <ButtonBackToHome />
-        </div> */}
+
         <footer className="footer footerDetail">
           <div className="content has-text-centered">
             <p>

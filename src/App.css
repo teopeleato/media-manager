@@ -8,6 +8,17 @@ body {
   background-color: black;
   height: 100vh;
 }
+
+/* DETAIL */
+.grid-detail article {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center;
+}
+.img-detail {
+  background-color: black !important;
+  padding: 0px !important;
+}
 .footerDetail {
   background-color: black !important;
   padding: 0.5rem 1.5rem 1.5rem !important;
@@ -46,6 +57,7 @@ body {
   color: #fff !important;
 }
 
+/* PAGINATION */
 .disabledLast,
 .disablePagination {
   display: none !important;
@@ -53,7 +65,6 @@ body {
 .disabledFirst {
   display: none !important;
 }
-
 nav {
   margin-top: 30px !important;
 }
@@ -72,4 +83,11 @@ nav {
 }
 .titleMovie {
   color: #000 !important;
+}
+
+@media all and (orientation: landscape) and (max-width: 768px) {
+  .column.is-full-mobile {
+    flex: none;
+    width: 50% !important;
+  }
 }
