@@ -94,6 +94,17 @@ nav {
   margin-left: 5px !important;
 }
 
+.icon-top {
+  margin-bottom: 5px !important;
+}
+
+@media all and (max-width: 768px) {
+  .column.is-full-mobile {
+    flex: none;
+    width: 50% !important;
+  }
+}
+
 @media all and (orientation: landscape) and (max-width: 768px) {
   .column.is-full-mobile {
     flex: none;

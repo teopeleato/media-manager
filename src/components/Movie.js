@@ -39,14 +39,14 @@ export class Movie extends Component {
             <div className="media-content">
               <p className="title is-4">{title}</p>
               <p className="subtitle is-6">{year}</p>
-              <button className="button is-info is-outlined is-small icon-left">
-                <i class="fas fa-info-circle icon-left" /> Details
+              <button className="button is-info is-outlined is-small icon-left icon-top">
+                <i className="fas fa-info-circle icon-left" /> Details
               </button>
-              <button className="button is-warning is-outlined is-small icon-left">
-                <i class="far fa-eye icon-left" /> To see
+              <button className="button is-warning is-outlined is-small icon-left icon-top">
+                <i className="far fa-eye icon-left" /> To see
               </button>
-              <button className="button is-success is-outlined is-small icon-left">
-                <i class="fas fa-check icon-left" /> Seen
+              <button className="button is-success is-outlined is-small icon-left icon-top">
+                <i className="fas fa-check icon-left" /> Seen
               </button>
             </div>
           </div>

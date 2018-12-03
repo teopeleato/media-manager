@@ -174,7 +174,7 @@ export class Detail extends Component {
           <div className="content has-text-centered">
             <p>
               <ButtonBackToHome />
-              <button className="button is-warning is-outlined is-medium icon-left">
+              <button className="button is-warning is-outlined is-medium icon-left icon-top">
                 <i class="far fa-eye icon-left" /> To see
               </button>
               <button className="button is-success is-outlined is-medium icon-left">

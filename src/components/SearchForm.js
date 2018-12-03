@@ -178,8 +178,8 @@ export class SearchForm extends Component {
                 className="button is-success is-outlined"
                 disabled={!this.state.inputMovie}
               >
-                <span class="icon-left">
-                <i class="fas fa-search"></i>
+                <span className="icon-left">
+                  <i className="fas fa-search" />
                 </span>{" "}
                 Search
               </button>
@@ -192,8 +192,8 @@ export class SearchForm extends Component {
                 onClick={this._clear}
               >
                 <span>Clear </span>
-                <span class="icon-right">
-                  <i class="fas fa-times" />
+                <span className="icon-right">
+                  <i className="fas fa-times" />
                 </span>
               </button>
             </div>
@@ -201,24 +201,12 @@ export class SearchForm extends Component {
         </form>
 
         <nav
-          className={`pagination is-centered is-small ${
+          className={`pagination is-centered is-small  ${
             this.state.disablePagination
           }`}
           role="navigation"
           aria-label="pagination"
         >
-          <button
-            className={`pagination-previous ${disabledFirst}`}
-            onClick={this._prevPage}
-          >
-            Previous
-          </button>
-          <button
-            className={`pagination-next ${disabledLast}`}
-            onClick={this._nextPage}
-          >
-            Next page
-          </button>
           <ul className="pagination-list">
             <li className={`${disabledFirst}`}>
               <button className="pagination-link" onClick={this._firstPage}>
@@ -246,6 +234,19 @@ export class SearchForm extends Component {
               </button>
             </li>
           </ul>
+
+          <button
+            className={`pagination-previous ${disabledFirst}`}
+            onClick={this._prevPage}
+          >
+            <i className="fas fa-arrow-left" />
+          </button>
+          <button
+            className={`pagination-next ${disabledLast}`}
+            onClick={this._nextPage}
+          >
+            <i className="fas fa-arrow-right" />
+          </button>
         </nav>
       </div>
     )
