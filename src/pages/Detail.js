@@ -101,7 +101,14 @@ export class Detail extends Component {
                   </div>
                 </article>
                 <article className="tile is-child notification is-info">
-                  <p className="subtitle">{Genre}</p>
+                  <div>
+                    <p className="subtitle">
+                      <i class="fas fa-video" /> {Type}
+                    </p>
+                    <p className="subtitle">
+                      <i class="fas fa-theater-masks" /> {Genre}
+                    </p>
+                  </div>
                 </article>
                 <article className="tile is-child notification is-warning">
                   <p className="subtitle">
@@ -167,6 +174,12 @@ export class Detail extends Component {
           <div className="content has-text-centered">
             <p>
               <ButtonBackToHome />
+              <button className="button is-warning is-outlined is-medium icon-left">
+                <i class="far fa-eye icon-left" /> To see
+              </button>
+              <button className="button is-success is-outlined is-medium icon-left">
+                <i class="fas fa-check icon-left" /> Seen
+              </button>
             </p>
           </div>
         </footer>

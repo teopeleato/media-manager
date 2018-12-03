@@ -178,6 +178,9 @@ export class SearchForm extends Component {
                 className="button is-success is-outlined"
                 disabled={!this.state.inputMovie}
               >
+                <span class="icon-left">
+                <i class="fas fa-search"></i>
+                </span>{" "}
                 Search
               </button>
             </div>
@@ -188,7 +191,10 @@ export class SearchForm extends Component {
                 className="button is-danger is-outlined"
                 onClick={this._clear}
               >
-                <span>Delete</span>
+                <span>Clear </span>
+                <span class="icon-right">
+                  <i class="fas fa-times" />
+                </span>
               </button>
             </div>
           </div>

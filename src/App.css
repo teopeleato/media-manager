@@ -87,6 +87,12 @@ nav {
 .titleMovie {
   color: #000 !important;
 }
+.icon-left {
+  margin-right: 5px !important;
+}
+.icon-right {
+  margin-left: 5px !important;
+}
 
 @media all and (orientation: landscape) and (max-width: 768px) {
   .column.is-full-mobile {
