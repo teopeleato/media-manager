@@ -3,6 +3,9 @@
   text-align: center;
   background-color: black;
 }
+.align-left {
+  text-align: left;
+}
 
 body {
   background-color: black;

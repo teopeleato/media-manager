@@ -87,26 +87,33 @@ export class Detail extends Component {
           <div className="tile is-vertical is-8">
             <div className="tile">
               <div className="tile is-parent is-vertical">
-                <article className="tile is-child notification is-primary">
+                <article className="tile is-child notification is-primary align-left">
                   <div>
                     <p className="subtitle">
-                      {Year} - {Country}
+                      <i className="far fa-calendar-alt" /> {Year}
                     </p>
-                    <p className="subtitle">{Runtime}</p>
+                    <p className="subtitle">
+                      <i class="fas fa-globe-americas" /> {Country}
+                    </p>
+                    <p className="subtitle">
+                      <i class="far fa-clock" /> {Runtime}
+                    </p>
                   </div>
                 </article>
                 <article className="tile is-child notification is-info">
                   <p className="subtitle">{Genre}</p>
                 </article>
                 <article className="tile is-child notification is-warning">
-                  <p className="subtitle">{Awards}</p>
+                  <p className="subtitle">
+                    <i class="fas fa-award" /> {Awards}
+                  </p>
                 </article>
               </div>
               <div className="tile is-parent">
                 <article className="tile is-child notification img-detail">
                   {/* <a class="card" href="/detail/tt0372784"> */}
-                  <div class="card-image">
-                    <figure class="image">
+                  <div className="card-image">
+                    <figure className="image">
                       <img src={Poster} alt={Title} />
                     </figure>
                   </div>
