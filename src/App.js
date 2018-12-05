@@ -5,14 +5,27 @@ import "bulma/css/bulma.css"
 import { Detail } from "./pages/Detail"
 import { Home } from "./pages/Home"
 import { NotFound } from "./pages/NotFound"
+import { LogIn } from "./components/LogIn/LogIn"
+import { LogOut } from "./components/LogOut/index"
+import { SignUpContainer } from "./components/SignUp/index"
 
 class App extends Component {
+  state = { loading: true, authenticated: false, user: null }
   render() {
+    /* const { authenticated, loading } = this.state;
+
+    if (loading) {
+      return <p>Loading..</p>;
+    } */
+
     return (
       <div className="App">
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/detail/:id" component={Detail} />
+          <Route exact path="/login" component={LogIn} />
+          <Route exact path="/signup" component={SignUpContainer} />
+          <Route exact path="/logout" component={LogOut} />
           <Route component={NotFound} />
         </Switch>
       </div>

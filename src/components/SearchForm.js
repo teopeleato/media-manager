@@ -144,6 +144,8 @@ export class SearchForm extends Component {
 
     return (
       <div className="container2">
+        <h1 className="title">Wishlist for popcorns</h1>
+        <h2 className="subtitle">Movies & Series</h2>
         <form onSubmit={this._handleSubmit}>
           {/* Text imput for TEXT TO SEARCH  */}
           <div className="field">

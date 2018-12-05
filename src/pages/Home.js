@@ -2,13 +2,17 @@ import React, { Component } from "react"
 import { SearchForm } from "../components/SearchForm"
 import { Title } from "../components/Title"
 import MoviesList from "../components/MoviesList"
+import LogIn from "../components/LogIn/LogIn"
+import SignUp from "../components/SignUp"
+import { Link } from "react-router-dom"
 
 export class Home extends Component {
   state = {
     userSearch: false,
     results: [],
     inputMovie: "",
-    placeholder: "Text to search..."
+    placeholder: "Text to search...",
+    auth: window.sessionStorage.getItem("auth")
   }
 
   _handleResults = results => {
@@ -38,6 +42,7 @@ export class Home extends Component {
       }
       const pageNumber = window.sessionStorage.getItem("pageNumber")
       const totalPages = window.sessionStorage.getItem("totalPages")
+
       this.setState({
         results,
         userSearch: true,
@@ -55,9 +60,28 @@ export class Home extends Component {
   }
 
   render() {
+    console.log("render ")
+    const isLoggedIn = this.state.auth
+    console.log("isLoggedIn: ", isLoggedIn)
+    let content = (
+      <div>
+        <Link to="/login">Log in</Link>
+      </div>
+    )
+    if (isLoggedIn === "true") {
+      content = (
+        <div>
+          <p>Hello! See my lists...</p>
+          <Link to="/logout">Log out</Link>
+        </div>
+      )
+    }
     return (
       <div>
-        <Title>Movies and Series</Title>
+        <div>
+          <div>{content}</div>
+        </div>
+        <hr />
         <div className="SearchForm-wrapper">
           {/* <div className="container"> */}
           <SearchForm
