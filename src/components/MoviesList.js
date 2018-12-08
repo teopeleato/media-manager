@@ -8,7 +8,7 @@ export class MoviesList extends Component {
   }
 
   render() {
-    const { movies } = this.props
+    const { movies, email } = this.props
     return (
       <div id="moviesList">
         <div className="columns is-multiline is-mobile">
@@ -22,8 +22,9 @@ export class MoviesList extends Component {
                   title={movie.Title}
                   type={movie.Type}
                   poster={movie.Poster}
-                  id={movie.imdbID}
+                  imdbID={movie.imdbID}
                   year={movie.Year}
+                  email={email}
                 />
               </div>
             )

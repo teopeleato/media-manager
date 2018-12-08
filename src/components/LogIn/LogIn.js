@@ -73,6 +73,7 @@ export class LogIn extends Component {
         email: user.user.email
       })
       window.sessionStorage.setItem("auth", true)
+      window.sessionStorage.setItem("email", user.user.email)
       console.log(user)
       this.props.history.push("/")
     } catch (error) {

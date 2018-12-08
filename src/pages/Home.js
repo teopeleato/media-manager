@@ -12,7 +12,8 @@ export class Home extends Component {
     results: [],
     inputMovie: "",
     placeholder: "Text to search...",
-    auth: window.sessionStorage.getItem("auth")
+    auth: window.sessionStorage.getItem("auth"),
+    email: window.sessionStorage.getItem("email")
   }
 
   _handleResults = results => {
@@ -24,7 +25,7 @@ export class Home extends Component {
       this.state.results === undefined ? (
       <p>No items found</p>
     ) : (
-      <MoviesList movies={this.state.results} />
+      <MoviesList movies={this.state.results} email={this.state.email} />
     )
   }
 
@@ -49,6 +50,7 @@ export class Home extends Component {
         pageNumber,
         totalPages
       })
+      window.sessionStorage.setItem("email", this.state.email)
       this._renderResults()
     } else {
       window.sessionStorage.setItem("sessionMovies", [])
@@ -71,7 +73,8 @@ export class Home extends Component {
     if (isLoggedIn === "true") {
       content = (
         <div>
-          <p>Hello! See my lists...</p>
+          <p>Hello!</p>
+          <Link to="/mylists">See my lists</Link> -{" "}
           <Link to="/logout">Log out</Link>
         </div>
       )

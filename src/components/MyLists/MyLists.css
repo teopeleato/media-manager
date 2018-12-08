@@ -1,0 +1,8 @@
+.list {
+  float: left;
+  width: 20%;
+  margin: 15px;
+  padding: 20px;
+  border: solid 1px blue;
+  background-color: #000;
+}

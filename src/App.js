@@ -8,6 +8,7 @@ import { NotFound } from "./pages/NotFound"
 import { LogIn } from "./components/LogIn/LogIn"
 import { LogOut } from "./components/LogOut/index"
 import { SignUpContainer } from "./components/SignUp/index"
+import { MyLists } from "./components/MyLists/index"
 
 class App extends Component {
   state = { loading: true, authenticated: false, user: null }
@@ -26,6 +27,7 @@ class App extends Component {
           <Route exact path="/login" component={LogIn} />
           <Route exact path="/signup" component={SignUpContainer} />
           <Route exact path="/logout" component={LogOut} />
+          <Route exact path="/mylists" component={MyLists}/>
           <Route component={NotFound} />
         </Switch>
       </div>
