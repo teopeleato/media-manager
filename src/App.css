@@ -97,6 +97,12 @@ nav {
   margin-bottom: 5px !important;
 } */
 
+.login-content {
+  padding: 15px 0;
+  margin-bottom: 15px;
+  background-color: rgb(161, 139, 161);
+}
+
 @media all and (orientation: landscape) and (max-width: 768px) {
   .column.is-full-mobile {
     flex: none;

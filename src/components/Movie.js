@@ -22,17 +22,56 @@ export class Movie extends Component {
   }
 
   _handleAddToWishlist = imdbID => {
+    //imdbID = "tt1569923" //esta
+    //imdbID = "tt4853102" //no esta
     const { email, type } = this.props
     const username = email.split("@")[0]
+    console.log("voy a añadir a lista del user: ", username, imdbID.imdbID)
     // const type = "seenMovies" //TO DO...
     let listName = "wishlistSeries"
     if (type === "movie") {
       listName = "wishlistMovies"
     }
-    const moviesInList = app
-      .database()
-      .ref(`users/` + username + `/lists/` + listName)
-    moviesInList.push(imdbID)
+
+    let arrayMovies = []
+    let exists = false
+    try {
+      // Obtengo la referencia al listado de pelis
+      const refList = app
+        .database()
+        .ref(`users/` + username + `/lists/` + listName)
+
+      // Obtengo listado de pelis
+      refList
+        .once("value", snapshot => {
+          snapshot.forEach(snapshot => {
+            const item = snapshot.val().imdbID.imdbID
+            arrayMovies.push(item)
+          })
+        })
+        .then(function() {
+          // Miro si ya está en la lista o no
+          // console.log("arrayMovies: ", arrayMovies)
+          exists = arrayMovies.indexOf(imdbID.imdbID)
+          console.log("exists: ", exists)
+          if (exists === -1) {
+            // Si no esta: la añado
+            refList.push({ imdbID }, function(error) {
+              if (error) {
+                console.log(error)
+              } else {
+                console.log("Añadido correctamente el id: ", imdbID.imdbID)
+              }
+            })
+          } else {
+            // Si ya estaba
+            console.log("ya esta en la lista!!!")
+            alert("¡Ya estaba en tu lista!")
+          }
+        })
+    } catch (error) {
+      console.log("error añadiendo a la lista", error)
+    }
   }
 
   render() {
@@ -86,10 +125,3 @@ export class Movie extends Component {
 }
 
 export default Movie
-
-{
-  /* </div>
-          </div>
-        </div>
-      </Link> */
-}

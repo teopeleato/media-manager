@@ -67,14 +67,14 @@ export class LogIn extends Component {
     const password = e.target.elements.password.value
     try {
       console.log("iniciando log in...")
-      // Create account in firebase with password
+      // Log In in firebase with password
       const user = await app.auth().signInWithEmailAndPassword(email, password)
       this.setState({
         email: user.user.email
       })
       window.sessionStorage.setItem("auth", true)
       window.sessionStorage.setItem("email", user.user.email)
-      console.log(user)
+      console.log("iniciada sesión del user: ", user.user.email)
       this.props.history.push("/")
     } catch (error) {
       console.log(error)

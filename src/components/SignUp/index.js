@@ -18,7 +18,7 @@ export class SignUpContainer extends Component {
         .then(() => {
           try {
             console.log("creado el user: ", email)
-            //Create empty lists
+            // Add user to LIsts Database
             const username = email.split("@")[0]
             const database = app.database()
             app
@@ -26,17 +26,23 @@ export class SignUpContainer extends Component {
               .ref("users/" + username)
               .set({
                 username: "teo",
-                email: email,
-                lists: {
+                email: email
+                /* lists: {
                   whislistMovies: { 0: "empty" },
                   seenMovies: { 0: "empty" },
                   whislistSeries: { 0: "empty" },
                   seenSeries: { 0: "empty" }
-                }
+                } */
               })
-              .then(console.log("creadas listas vacias del user: ", username))
+              .then(
+                console.log(
+                  "añadido a la BD de las listas el usuario: ",
+                  username
+                )
+              )
+            this.props.history.push("/")
           } catch (error) {
-            console.log("error creating empty lists: ", error)
+            console.log("error adding user to Lists Database: ", error)
           }
         })
     } catch (error) {
@@ -51,5 +57,3 @@ export class SignUpContainer extends Component {
 
 // export default withRouter(SignUpContainer) //????
 export default SignUpContainer
-
-/* .ref("users/" + email) */

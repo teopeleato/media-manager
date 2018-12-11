@@ -67,7 +67,7 @@ export class Home extends Component {
     console.log("isLoggedIn: ", isLoggedIn)
     let content = (
       <div>
-        <Link to="/login">Log in</Link>
+        <Link to="/login">Log in</Link> - <Link to="/signup">Sign Up</Link>
       </div>
     )
     if (isLoggedIn === "true") {
@@ -82,9 +82,8 @@ export class Home extends Component {
     return (
       <div>
         <div>
-          <div>{content}</div>
+          <div className="login-content">{content}</div>
         </div>
-        <hr />
         <div className="SearchForm-wrapper">
           {/* <div className="container"> */}
           <SearchForm
