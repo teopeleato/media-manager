@@ -5,6 +5,7 @@ import MoviesList from "../components/MoviesList"
 import LogIn from "../components/LogIn/LogIn"
 import SignUp from "../components/SignUp"
 import { Link } from "react-router-dom"
+import Header from "../components/Header"
 
 export class Home extends Component {
   state = {
@@ -62,28 +63,9 @@ export class Home extends Component {
   }
 
   render() {
-    console.log("render ")
-    const isLoggedIn = this.state.auth
-    console.log("isLoggedIn: ", isLoggedIn)
-    let content = (
-      <div>
-        <Link to="/login">Log in</Link> - <Link to="/signup">Sign Up</Link>
-      </div>
-    )
-    if (isLoggedIn === "true") {
-      content = (
-        <div>
-          <p>Hello!</p>
-          <Link to="/mylists">See my lists</Link> -{" "}
-          <Link to="/logout">Log out</Link>
-        </div>
-      )
-    }
     return (
       <div>
-        <div>
-          <div className="login-content">{content}</div>
-        </div>
+        <Header auth={this.state.auth} email={this.state.email} />
         <div className="SearchForm-wrapper">
           {/* <div className="container"> */}
           <SearchForm

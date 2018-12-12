@@ -22,8 +22,6 @@ export class Movie extends Component {
   }
 
   _handleAddToWishlist = imdbID => {
-    //imdbID = "tt1569923" //esta
-    //imdbID = "tt4853102" //no esta
     const { email, type } = this.props
     const username = email.split("@")[0]
     console.log("voy a añadir a lista del user: ", username, imdbID.imdbID)
@@ -79,7 +77,7 @@ export class Movie extends Component {
 
     return (
       <div>
-        <Link to={`/detail/${id}`} className="card" title="Show details">
+        <Link to={`/detail/${imdbID}`} className="card" title="Show details">
           <div className="card-image">
             <figure className="image">
               <img
@@ -94,7 +92,6 @@ export class Movie extends Component {
               <div className="media-content">
                 <p className="title is-4">{title}</p>
                 <p className="subtitle is-6">{year}</p>
-                <p>{imdbID}</p>
               </div>
             </div>
           </div>

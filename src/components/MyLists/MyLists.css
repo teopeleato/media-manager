@@ -6,3 +6,10 @@
   border: solid 1px blue;
   background-color: #000;
 }
+
+.list-buttons {
+  padding-top: 25px;
+}
+.list-buttons button {
+  width: 20%;
+}

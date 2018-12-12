@@ -99,8 +99,9 @@ nav {
 
 .login-content {
   padding: 15px 0;
-  margin-bottom: 15px;
-  background-color: rgb(161, 139, 161);
+  margin-bottom: 20px;
+  border-bottom: 1px solid #fff;
+  /* background-color: rgb(161, 139, 161); */
 }
 
 @media all and (orientation: landscape) and (max-width: 768px) {

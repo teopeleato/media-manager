@@ -25,7 +25,7 @@ export class SignUpContainer extends Component {
               .database()
               .ref("users/" + username)
               .set({
-                username: "teo",
+                username: username,
                 email: email
                 /* lists: {
                   whislistMovies: { 0: "empty" },
