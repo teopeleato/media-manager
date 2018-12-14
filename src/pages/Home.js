@@ -2,9 +2,6 @@ import React, { Component } from "react"
 import { SearchForm } from "../components/SearchForm"
 import { Title } from "../components/Title"
 import MoviesList from "../components/MoviesList"
-import LogIn from "../components/LogIn/LogIn"
-import SignUp from "../components/SignUp"
-import { Link } from "react-router-dom"
 import Header from "../components/Header"
 
 export class Home extends Component {

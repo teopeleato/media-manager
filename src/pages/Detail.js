@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { PropTypes } from "prop-types"
-import { ButtonBackToHome } from "./../components/ButtonBackToHome"
+import { ButtonBackToHome } from "../components/ButtonBackToHome/ButtonBackToHome"
 import imgDefault from "../assets/img-default.png"
 
 const API_KEY = "28b20f8"

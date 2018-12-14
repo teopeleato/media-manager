@@ -31,6 +31,9 @@ body {
   background-color: black !important;
   color: #fff !important;
 }
+.card-content {
+  padding: 1.5rem 0.5rem !important;
+}
 
 .SearchForm-wrapper {
   display: flex;
@@ -48,7 +51,7 @@ body {
 }
 
 #moviesList .columns {
-  padding: 24px;
+  padding: 40px 24px;
 }
 
 img {
@@ -70,6 +73,15 @@ body {
 }
 nav {
   margin-top: 30px !important;
+}
+.half-width {
+  width: 50%;
+}
+.top-space {
+  padding-top: 20px;
+}
+.top-space-10 {
+  padding-top: 10px;
 }
 
 /* .icon {
@@ -102,6 +114,10 @@ nav {
   margin-bottom: 20px;
   border-bottom: 1px solid #fff;
   /* background-color: rgb(161, 139, 161); */
+}
+
+.disableButton {
+  display: none !important;
 }
 
 @media all and (orientation: landscape) and (max-width: 768px) {

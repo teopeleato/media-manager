@@ -5,6 +5,13 @@ import imgDefault from "../assets/img-default.png"
 import app from "../base.js"
 
 export class Movie extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      removeFromListButton: this.props.removeFromListButton,
+      addToListButton: this.props.addToListButton
+    }
+  }
   state = {
     imageError: false
   }
@@ -21,7 +28,7 @@ export class Movie extends Component {
     this.setState({ imageError: true })
   }
 
-  _handleAddToWishlist = imdbID => {
+  _handleAddToWishlist = (imdbID, title) => {
     const { email, type } = this.props
     const username = email.split("@")[0]
     console.log("voy a añadir a lista del user: ", username, imdbID.imdbID)
@@ -59,12 +66,13 @@ export class Movie extends Component {
                 console.log(error)
               } else {
                 console.log("Añadido correctamente el id: ", imdbID.imdbID)
+                alert("Done! Now'" + imdbID.title + "' is in your list.")
               }
             })
           } else {
             // Si ya estaba
             console.log("ya esta en la lista!!!")
-            alert("¡Ya estaba en tu lista!")
+            alert("Ey! '" + imdbID.title + "' was already in your list...")
           }
         })
     } catch (error) {
@@ -73,12 +81,12 @@ export class Movie extends Component {
   }
 
   render() {
-    const { title, year, poster, id, imdbID } = this.props
+    const { title, year, poster, imdbID } = this.props
 
     return (
       <div>
-        <Link to={`/detail/${imdbID}`} className="card" title="Show details">
-          <div className="card-image">
+        <div className="card-image">
+          <Link to={`/detail/${imdbID}`} className="card" title="Show details">
             <figure className="image">
               <img
                 onError={this._handleImageError}
@@ -86,36 +94,56 @@ export class Movie extends Component {
                 alt={title}
               />
             </figure>
-          </div>
-          <div className="card-content">
-            <div className="media">
-              <div className="media-content">
-                <p className="title is-4">{title}</p>
-                <p className="subtitle is-6">{year}</p>
+          </Link>
+        </div>
+        <div className="card-content">
+          <div className="media">
+            <div className="media-content">
+              <Link
+                to={`/detail/${imdbID}`}
+                className="card"
+                title="Show details"
+              >
+                <p className="title is-size-6-mobile is-size-5-tablet is-size-5-desktop">
+                  {title}
+                </p>
+              </Link>
+              <div className="subtitle is-size-7-mobile is-size-7-tablet is-size-6-desktop top-space-10">
+                {year}
               </div>
+              <Link
+                to={`/detail/${imdbID}`}
+                className="card"
+                title="Show details"
+              >
+                <button
+                  className="button is-info is-outlined is-small icon-left"
+                  title="Show details"
+                >
+                  <i className="fas fa-info-circle" />
+                </button>
+              </Link>
+              <button
+                className={`button is-warning is-outlined is-small icon-left ${
+                  this.state.addToListButton
+                }`}
+                title="Add to wishlist"
+                type="submit"
+                onClick={() => this._handleAddToWishlist({ imdbID, title })}
+              >
+                <i className="far fa-eye" />
+              </button>
+              <button
+                className={`button is-danger is-outlined is-small icon-left ${
+                  this.state.removeFromListButton
+                }`}
+                title="Remove from list"
+              >
+                <i className="far fa-trash-alt" />
+              </button>
             </div>
           </div>
-        </Link>
-        <button
-          className="button is-info is-outlined is-small icon-left"
-          title="Show details"
-        >
-          <i className="fas fa-info-circle" />
-        </button>
-        <button
-          className="button is-warning is-outlined is-small icon-left"
-          title="Add to wishlist"
-          type="submit"
-          onClick={() => this._handleAddToWishlist({ imdbID })}
-        >
-          <i className="far fa-eye" />
-        </button>
-        <button
-          className="button is-success is-outlined is-small icon-left"
-          title="Mark as seen"
-        >
-          <i className="fas fa-check" />
-        </button>
+        </div>
       </div>
     )
   }

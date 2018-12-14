@@ -2,34 +2,42 @@ import React, { Component } from "react"
 import app from "../../base"
 import "./MyLists.css"
 import { MoviesList } from "./../MoviesList"
-import { ButtonBackToHome } from "./../ButtonBackToHome"
+import { ButtonBackToHome } from "../ButtonBackToHome/ButtonBackToHome"
 import { Header } from "./../Header/index"
-import { Movie } from "../Movie"
 import PropTypes from "prop-types"
 
 const API_KEY = "28b20f8"
 
 export class MyLists extends Component {
   state = {
-    types: [
-      { type: "seenMovies", name: "Seen Movies" },
-      { type: "wishlistMovies", name: "Wishlist Movies" },
-      { type: "seenSeries", name: "Seen Series" },
-      { type: "wishlistSeries", name: "Wishlist Series" }
-    ],
+    type: "wishlistMovies",
+    name: "Movies",
+    /* "seenMovies", "wishlistMovies", "seenSeries", "wishlistSeries" */
     movies: [],
-    listTitle: ""
+    listTitle: "",
+    isActiveMovies: "is-active",
+    isActiveSeries: ""
   }
 
   static propTypes = {
     movies: PropTypes.array
   }
 
+  componentWillMount = () => {
+    console.log("entro componentWillMount!!")
+    const firstList = this.state.type
+    console.log("firstList: ", firstList)
+    this._getLists(firstList)
+  }
+
   _getLists(type) {
     this.setState({ listTitle: type })
-    let arrayMovies = []
     try {
-      console.log(type)
+      console.log("type: ", type)
+      // Vacío listado de pelis
+      this.setState({
+        movies: []
+      })
 
       const email = window.sessionStorage.getItem("email")
       const username = email.split("@")[0]
@@ -42,14 +50,13 @@ export class MyLists extends Component {
           const item = snapshot.val().imdbID.imdbID
           // Para cada id consulto sus caracteristicas
           const fetchQuery = `http://www.omdbapi.com/?apikey=${API_KEY}&i=${item}`
-          console.log(fetchQuery)
           fetch(fetchQuery)
             .then(response => response.json())
             .then(data => {
               this.setState({
                 movies: [...this.state.movies, data]
               })
-              console.log("movies: ", this.state.movies)
+              // console.log("movies: ", this.state.movies)
             })
         })
       })
@@ -61,22 +68,63 @@ export class MyLists extends Component {
   render() {
     return (
       <div>
-        <Header />
+        {/* <Header /> */}
         <div>
-          <p>Choose the list you want to see:</p>
-          {this.state.types.map(({ type, name }) => (
-            <div className="list-buttons" key={type}>
-              <button
-                onClick={() => this._getLists(type)}
-                className="button is-info"
-              >
-                {name}
-              </button>
-            </div>
-          ))}
+          {/* <h1 className="title">My wishlist lists</h1> */}
+          {/* <h2 className="subtitle">Select the list to show</h2> */}
+          <div className="tabs is-centered is-medium  top-20">
+            <ul>
+              <li className={this.state.isActiveMovies}>
+                {/* <a onClick={() => this._getLists(type)}> */}
+                <a
+                  onClick={() => {
+                    this.setState({
+                      type: "wishlistMovies",
+                      name: "Movies",
+                      isActiveMovies: "is-active",
+                      isActiveSeries: ""
+                    })
+                    this._getLists("wishlistMovies")
+                  }}
+                >
+                  <span className="icon is-small">
+                    <i className="fas fa-film" aria-hidden="true" />
+                  </span>
+                  {/* <span>{name}</span> */}
+                  <span>{this.state.name}</span>
+                </a>
+              </li>
+              <li className={this.state.isActiveSeries}>
+                {/* <a onClick={() => this._getLists(type)}> */}
+                <a
+                  onClick={() => {
+                    this.setState({
+                      type: "wishlistSeries",
+                      name: "Series",
+                      isActiveMovies: "",
+                      isActiveSeries: "is-active"
+                    })
+                    this._getLists("wishlistSeries")
+                  }}
+                >
+                  <span className="icon is-small">
+                    <i className="fas fa-tv" aria-hidden="true" />
+                  </span>
+                  {/* <span>{name}</span> */}
+                  <span>{this.state.name}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
-        <h2>{this.state.listTitle}</h2>
-        <MoviesList movies={this.state.movies} email={"teopeleato@yahoo.es"} />
+        {/* <h1 className="title top-space">
+          {this.state.listTitle.toUpperCase()}
+        </h1> */}
+        <MoviesList
+          movies={this.state.movies}
+          email={"teopeleato@yahoo.es"}
+          isMyLists="true"
+        />
         <footer className="footer footerDetail">
           <div className="content has-text-centered">
             <ButtonBackToHome />
@@ -88,26 +136,3 @@ export class MyLists extends Component {
 }
 
 export default MyLists
-{
-  /* {this.state.movies.map(function(movie, i) {
-          return (
-          )
-        })}
-   */
-}
-
-{
-  /* <div
-              key={movie.imdbID}
-              className="column is-full-mobile is-one-third-tablet is-one-fifth-desktop is-one-fifth-widescreen is-one-fifth-fullhd"
-            >
-              <Movie
-                title={movie.Title}
-                type={movie.Type}
-                poster={movie.Poster}
-                imdbID={movie.imdbID}
-                year={movie.Year}
-                email={"teopeleato@yahoo.es"}
-              />
-            </div> */
-}

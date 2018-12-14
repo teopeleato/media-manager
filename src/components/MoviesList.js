@@ -3,8 +3,24 @@ import PropTypes from "prop-types"
 import { Movie } from "./Movie"
 
 export class MoviesList extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      isMyLists: this.props.isMyLists,
+      removeFromListButton: "disableButton",
+      addToListButton: ""
+    }
+  }
+
   static propTypes = {
     movies: PropTypes.array
+  }
+
+  componentDidMount = () => {
+    if (this.props.isMyLists === "true") {
+      this.setState({ removeFromListButton: "" })
+      this.setState({ addToListButton: "disableButton" })
+    }
   }
 
   render() {
@@ -16,7 +32,7 @@ export class MoviesList extends Component {
             return (
               <div
                 key={movie.imdbID}
-                className="column is-full-mobile is-one-third-tablet is-one-fifth-desktop is-one-fifth-widescreen is-one-fifth-fullhd"
+                className="column is-half-mobile is-one-quarter-tablet is-one-fifth-desktop is-one-fifth-widescreen is-one-fifth-fullhd"
               >
                 <Movie
                   title={movie.Title}
@@ -25,6 +41,8 @@ export class MoviesList extends Component {
                   imdbID={movie.imdbID}
                   year={movie.Year}
                   email={email}
+                  removeFromListButton={this.state.removeFromListButton}
+                  addToListButton={this.state.addToListButton}
                 />
               </div>
             )

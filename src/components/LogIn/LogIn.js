@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import "./login.css"
-import LogInView from "./LogInView"
 import app from "../../base"
 import { Link } from "react-router-dom"
 
@@ -83,51 +82,51 @@ export class LogIn extends Component {
 
   render() {
     return (
-      <div>
-        {/* <LogInView onSubmit={this._handleLogIn} /> */}
-
-        <h1>Log In</h1>
-        <form onSubmit={this._handleLogIn}>
-          <div className="field">
-            <p className="control has-icons-left">
-              <input
-                name="email"
-                className="input"
-                type="email"
-                placeholder="Email"
-              />
-              <span className="icon is-small is-left">
-                <i className="fas fa-envelope" />
-              </span>
-            </p>
-          </div>
-          <div className="field">
-            <p className="control has-icons-left">
-              <input
-                name="password"
-                className="input"
-                type="password"
-                placeholder="Password"
-              />
-              <span className="icon is-small is-left">
-                <i className="fas fa-lock" />
-              </span>
-            </p>
-          </div>
-          <div className="field">
-            <p className="control">
-              <button className="button is-success is-outlined icon-left">
-                Login
-              </button>
-              <Link
-                className="button is-danger is-outlined icon-left"
-                to={`${process.env.PUBLIC_URL}/`}
-              >
-                Back
-              </Link>
-            </p>
-          </div>
-        </form>
+      <div className="columns">
+        <div className="column is-half is-offset-one-quarter">
+          <h1 className="title">Log In</h1>
+          <form onSubmit={this._handleLogIn}>
+            <div className="field">
+              <p className="control has-icons-left">
+                <input
+                  name="email"
+                  className="input"
+                  type="email"
+                  placeholder="Email"
+                />
+                <span className="icon is-small is-left">
+                  <i className="fas fa-envelope" />
+                </span>
+              </p>
+            </div>
+            <div className="field">
+              <p className="control has-icons-left">
+                <input
+                  name="password"
+                  className="input"
+                  type="password"
+                  placeholder="Password"
+                />
+                <span className="icon is-small is-left">
+                  <i className="fas fa-lock" />
+                </span>
+              </p>
+            </div>
+            <div className="field">
+              <p className="control">
+                <button className="button is-success is-outlined icon-left">
+                  Login
+                </button>
+                <Link
+                  className="button is-danger is-outlined icon-left"
+                  to={`${process.env.PUBLIC_URL}/`}
+                >
+                  Back
+                </Link>
+              </p>
+            </div>
+          </form>
+        </div>
       </div>
     )
   }

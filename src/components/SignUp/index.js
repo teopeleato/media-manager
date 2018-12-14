@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import { withRouter } from "react-router"
 import SignUpView from "./SignUpView"
 import app from "../../base"
 
@@ -55,5 +54,4 @@ export class SignUpContainer extends Component {
   }
 }
 
-// export default withRouter(SignUpContainer) //????
 export default SignUpContainer

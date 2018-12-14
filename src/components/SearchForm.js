@@ -67,7 +67,7 @@ export class SearchForm extends Component {
     this.props.onResults(Search)
     // esto nuevo para cambiar el placeholder con la busqueda anterior...
     window.sessionStorage.setItem("sessionMovies", JSON.stringify(Search))
-    window.sessionStorage.setItem("placeholder", "Text to search 22...")
+    window.sessionStorage.setItem("placeholder", "Text to search...")
     this.setState({
       disablePagination: "disablePagination",
       placeholder: "Text to search 11..." //tras pasar por Detail

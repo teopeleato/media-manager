@@ -1,15 +1,21 @@
-.list {
+/* .list {
   float: left;
   width: 20%;
   margin: 15px;
   padding: 20px;
   border: solid 1px blue;
   background-color: #000;
-}
+} */
 
-.list-buttons {
+/* .list-buttons {
   padding-top: 25px;
+} */
+/* .list-buttons button {
+  width: 50%;
+} */
+li {
+  width: 50%;
 }
-.list-buttons button {
-  width: 20%;
+.top-20 {
+  padding-top: 20px !important;
 }
