@@ -16,7 +16,8 @@ export class MyLists extends Component {
     movies: [],
     listTitle: "",
     isActiveMovies: "is-active",
-    isActiveSeries: ""
+    isActiveSeries: "",
+    email: window.sessionStorage.getItem("email")
   }
 
   static propTypes = {
@@ -30,6 +31,42 @@ export class MyLists extends Component {
     this._getLists(firstList)
   }
 
+  _getLists_ORIGINAL(type) {
+    this.setState({ listTitle: type })
+    try {
+      console.log("type: ", type)
+      // Vacío listado de pelis
+      this.setState({
+        movies: []
+      })
+
+      // const email = window.sessionStorage.getItem("email")
+      const email = this.state.email
+      const username = email.split("@")[0]
+      console.log("mostrando listas de: ", username)
+      const refList = app.database().ref(`users/` + username + `/lists/` + type)
+
+      // Obtengo listado de pelis
+      refList.once("value", snapshot => {
+        snapshot.forEach(snapshot => {
+          const item = snapshot.val().imdbID.imdbID
+          // Para cada id consulto sus caracteristicas
+          const fetchQuery = `http://www.omdbapi.com/?apikey=${API_KEY}&i=${item}`
+          fetch(fetchQuery)
+            .then(response => response.json())
+            .then(data => {
+              this.setState({
+                movies: [...this.state.movies, data]
+              })
+              // console.log("movies: ", this.state.movies)
+            })
+        })
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   _getLists(type) {
     this.setState({ listTitle: type })
     try {
@@ -39,15 +76,18 @@ export class MyLists extends Component {
         movies: []
       })
 
-      const email = window.sessionStorage.getItem("email")
+      // const email = window.sessionStorage.getItem("email")
+      const email = this.state.email
       const username = email.split("@")[0]
       console.log("mostrando listas de: ", username)
-      const refList = app.database().ref(`users/` + username + `/lists/` + type)
+      const refList = app
+        .database()
+        .ref(`users/` + username + `/lists/` + type + `/items/`)
 
       // Obtengo listado de pelis
       refList.once("value", snapshot => {
         snapshot.forEach(snapshot => {
-          const item = snapshot.val().imdbID.imdbID
+          const item = snapshot.val().imdbID
           // Para cada id consulto sus caracteristicas
           const fetchQuery = `http://www.omdbapi.com/?apikey=${API_KEY}&i=${item}`
           fetch(fetchQuery)
@@ -122,7 +162,7 @@ export class MyLists extends Component {
         </h1> */}
         <MoviesList
           movies={this.state.movies}
-          email={"teopeleato@yahoo.es"}
+          email={this.state.email}
           isMyLists="true"
         />
         <footer className="footer footerDetail">

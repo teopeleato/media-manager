@@ -28,7 +28,38 @@ export class Movie extends Component {
     this.setState({ imageError: true })
   }
 
-  _handleAddToWishlist = (imdbID, title) => {
+  /* _handleAddToWishlist = (imdbID, title) => {
+    const { email, type } = this.props
+    const username = email.split("@")[0]
+    console.log("voy a añadir a lista del user: ", username, imdbID.imdbID)
+    // const type = "seenMovies" //TO DO...
+    let listName = "wishlistSeries"
+    if (type === "movie") {
+      listName = "wishlistMovies"
+    }
+
+    let arrayMovies = []
+    let exists = false
+    try {
+      // Obtengo la referencia al listado de pelis
+      const refList = app
+        .database()
+        .ref(`users/` + username + `/lists/` + listName)
+
+      const clave = refList.push().key
+      refList.set({
+        username: username,
+        email: email,
+        clave: clave,
+        title: imdbID.title,
+        id: imdbID.imdbID
+      })
+    } catch (error) {
+      console.log("error añadiendo a la lista", error)
+    }
+  } */
+
+  _handleAddToWishlist_ORIGINAL = (imdbID, title) => {
     const { email, type } = this.props
     const username = email.split("@")[0]
     console.log("voy a añadir a lista del user: ", username, imdbID.imdbID)
@@ -66,6 +97,7 @@ export class Movie extends Component {
                 console.log(error)
               } else {
                 console.log("Añadido correctamente el id: ", imdbID.imdbID)
+                // console.log("{ imdbID }!!!!!: ", imdbID)
                 alert("Done! Now'" + imdbID.title + "' is in your list.")
               }
             })
@@ -77,6 +109,87 @@ export class Movie extends Component {
         })
     } catch (error) {
       console.log("error añadiendo a la lista", error)
+    }
+  }
+
+  _handleAddToWishlist = (imdbID, title) => {
+    const { email, type } = this.props
+    const username = email.split("@")[0]
+    console.log("voy a añadir a lista del user: ", username, imdbID)
+    // const type = "seenMovies" //TO DO...
+    let listName = "wishlistSeries"
+    if (type === "movie") {
+      listName = "wishlistMovies"
+    }
+
+    let arrayMovies = []
+    let exists = false
+    try {
+      // Obtengo la referencia al listado de pelis
+      const refList = app
+        .database()
+        .ref(`users/` + username + `/lists/` + listName + `/items/`)
+
+      // Obtengo listado de pelis
+      refList
+        .once("value", snapshot => {
+          snapshot.forEach(snapshot => {
+            const item = snapshot.val().imdbID
+            arrayMovies.push(item)
+          })
+        })
+        .then(function() {
+          // Miro si ya está en la lista o no
+          // console.log("arrayMovies: ", arrayMovies)
+          exists = arrayMovies.indexOf(imdbID)
+          console.log("exists: ", exists)
+          if (exists === -1) {
+            // Si no esta: la añado
+            refList.push({ imdbID }, function(error) {
+              // ???????????
+              if (error) {
+                console.log(error)
+              } else {
+                console.log("Añadido correctamente el id: ", imdbID)
+                // console.log("{ imdbID }!!!!!: ", imdbID)
+                alert("Done! Now'" + title + "' is in your list.")
+              }
+            })
+          } else {
+            // Si ya estaba
+            console.log("ya esta en la lista!!!")
+            alert("Ey! '" + title + "' was already in your list...")
+          }
+        })
+    } catch (error) {
+      console.log("error añadiendo a la lista", error)
+    }
+  }
+
+  _handleRemoveFromList = (imdbID, title) => {
+    const { email, type } = this.props
+    const username = email.split("@")[0]
+    let listName = "wishlistSeries"
+    if (type === "movie") {
+      listName = "wishlistMovies"
+    }
+    console.log("remoooooooooooooove", imdbID, title, type, email)
+    try {
+      // Obtengo la referencia al listado de pelis
+      const refList = app
+        .database()
+        .ref(`users/` + username + `/lists/` + listName + `/items/`)
+        .orderByChild("imdbID")
+        .equalTo(imdbID)
+        .on("value", function(snapshot) {
+          console.log("snapshot.val(): ", snapshot.val())
+          snapshot.forEach(function(child) {
+            console.log("eliminando el id: ", imdbID)
+            child.ref.remove()
+          })
+        })
+    } catch (error) {
+      console.log(error)
     }
   }
 
@@ -129,7 +242,7 @@ export class Movie extends Component {
                 }`}
                 title="Add to wishlist"
                 type="submit"
-                onClick={() => this._handleAddToWishlist({ imdbID, title })}
+                onClick={() => this._handleAddToWishlist(imdbID, title)}
               >
                 <i className="far fa-eye" />
               </button>
@@ -138,6 +251,7 @@ export class Movie extends Component {
                   this.state.removeFromListButton
                 }`}
                 title="Remove from list"
+                onClick={() => this._handleRemoveFromList(imdbID, title)}
               >
                 <i className="far fa-trash-alt" />
               </button>
@@ -150,3 +264,11 @@ export class Movie extends Component {
 }
 
 export default Movie
+
+{
+  /* onClick={() => this._handleAddToWishlist({ imdbID, title })}
+
+  onClick={() => this._handleRemoveFromList({ imdbID, title })}
+  
+  */
+}
