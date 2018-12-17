@@ -43,6 +43,7 @@ export class MoviesList extends Component {
                   email={email}
                   removeFromListButton={this.state.removeFromListButton}
                   addToListButton={this.state.addToListButton}
+                  movies={movies}
                 />
               </div>
             )

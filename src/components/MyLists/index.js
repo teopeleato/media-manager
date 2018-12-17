@@ -13,7 +13,8 @@ export class MyLists extends Component {
     type: "wishlistMovies",
     name: "Movies",
     /* "seenMovies", "wishlistMovies", "seenSeries", "wishlistSeries" */
-    movies: [],
+    /* movies: [], */
+    // movies: window.sessionStorage.getItem("movie"),
     listTitle: "",
     isActiveMovies: "is-active",
     isActiveSeries: "",
@@ -31,42 +32,6 @@ export class MyLists extends Component {
     this._getLists(firstList)
   }
 
-  _getLists_ORIGINAL(type) {
-    this.setState({ listTitle: type })
-    try {
-      console.log("type: ", type)
-      // Vacío listado de pelis
-      this.setState({
-        movies: []
-      })
-
-      // const email = window.sessionStorage.getItem("email")
-      const email = this.state.email
-      const username = email.split("@")[0]
-      console.log("mostrando listas de: ", username)
-      const refList = app.database().ref(`users/` + username + `/lists/` + type)
-
-      // Obtengo listado de pelis
-      refList.once("value", snapshot => {
-        snapshot.forEach(snapshot => {
-          const item = snapshot.val().imdbID.imdbID
-          // Para cada id consulto sus caracteristicas
-          const fetchQuery = `http://www.omdbapi.com/?apikey=${API_KEY}&i=${item}`
-          fetch(fetchQuery)
-            .then(response => response.json())
-            .then(data => {
-              this.setState({
-                movies: [...this.state.movies, data]
-              })
-              // console.log("movies: ", this.state.movies)
-            })
-        })
-      })
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
   _getLists(type) {
     this.setState({ listTitle: type })
     try {
@@ -76,7 +41,6 @@ export class MyLists extends Component {
         movies: []
       })
 
-      // const email = window.sessionStorage.getItem("email")
       const email = this.state.email
       const username = email.split("@")[0]
       console.log("mostrando listas de: ", username)
@@ -96,7 +60,6 @@ export class MyLists extends Component {
               this.setState({
                 movies: [...this.state.movies, data]
               })
-              // console.log("movies: ", this.state.movies)
             })
         })
       })
@@ -115,7 +78,6 @@ export class MyLists extends Component {
           <div className="tabs is-centered is-medium  top-20">
             <ul>
               <li className={this.state.isActiveMovies}>
-                {/* <a onClick={() => this._getLists(type)}> */}
                 <a
                   onClick={() => {
                     this.setState({
@@ -130,12 +92,10 @@ export class MyLists extends Component {
                   <span className="icon is-small">
                     <i className="fas fa-film" aria-hidden="true" />
                   </span>
-                  {/* <span>{name}</span> */}
                   <span>{this.state.name}</span>
                 </a>
               </li>
               <li className={this.state.isActiveSeries}>
-                {/* <a onClick={() => this._getLists(type)}> */}
                 <a
                   onClick={() => {
                     this.setState({
@@ -150,7 +110,6 @@ export class MyLists extends Component {
                   <span className="icon is-small">
                     <i className="fas fa-tv" aria-hidden="true" />
                   </span>
-                  {/* <span>{name}</span> */}
                   <span>{this.state.name}</span>
                 </a>
               </li>
