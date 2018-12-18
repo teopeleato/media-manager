@@ -84,7 +84,7 @@ export class LogIn extends Component {
     return (
       <div className="columns">
         <div className="column is-half is-offset-one-quarter">
-          <h1 className="title">Log In</h1>
+          <h1 className="title">Login</h1>
           <form onSubmit={this._handleLogIn}>
             <div className="field">
               <p className="control has-icons-left">

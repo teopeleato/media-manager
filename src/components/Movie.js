@@ -180,7 +180,10 @@ export class Movie extends Component {
                 type="submit"
                 onClick={() => this._handleAddToWishlist(imdbID, title)}
               >
-                <i className="far fa-eye" />
+                <span className="icon-left">
+                  <i className="far fa-eye" />
+                </span>{" "}
+                Add
               </button>
               <button
                 className={`button is-danger is-outlined is-small icon-left ${
@@ -189,6 +192,10 @@ export class Movie extends Component {
                 title="Remove from list"
                 onClick={() => this._handleRemoveFromList(imdbID, title)}
               >
+                {/* <span className="icon-left">
+                  <i className="far fa-trash-alt" />
+                </span>{" "}
+                Remove */}
                 <i className="far fa-trash-alt" />
               </button>
             </div>

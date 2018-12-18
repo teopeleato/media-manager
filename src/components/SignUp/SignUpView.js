@@ -5,18 +5,7 @@ const SignUpView = ({ onSubmit }) => {
   return (
     <div className="columns">
       <div className="column is-half is-offset-one-quarter">
-        <h1 class="title">Sign up</h1>
-        {/* <form onSubmit={onSubmit}>
-          <label>
-            Email
-            <input name="email" type="email" placeholder="Email" />
-          </label>
-          <label>
-            Password
-            <input name="password" type="password" placeholder="Password" />
-          </label>
-          <button type="submit">Sign Up</button>
-        </form> */}
+        <h1 className="title">Register</h1>
 
         <form onSubmit={onSubmit}>
           <div className="field">
@@ -43,12 +32,13 @@ const SignUpView = ({ onSubmit }) => {
               <span className="icon is-small is-left">
                 <i className="fas fa-lock" />
               </span>
+              Password: Min 6 characters
             </p>
           </div>
           <div className="field">
             <p className="control">
               <button className="button is-success is-outlined icon-left">
-                Sign Up
+                Register
               </button>
               <Link
                 className="button is-danger is-outlined icon-left"

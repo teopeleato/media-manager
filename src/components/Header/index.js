@@ -16,7 +16,7 @@ export class Header extends Component {
     const { auth } = this.props
     let content = (
       <div>
-        <Link to="/login">Log in</Link> - <Link to="/signup">Sign Up</Link>
+        <Link to="/login">Log in</Link> - <Link to="/signup">Register</Link>
       </div>
     )
     if (auth === "true") {
@@ -44,7 +44,3 @@ export class Header extends Component {
 }
 
 export default Header
-
-{
-  /* <Link to="/mylists/wishlistMovies">My lists</Link> -{" "} */
-}

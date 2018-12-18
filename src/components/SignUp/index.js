@@ -26,12 +26,6 @@ export class SignUpContainer extends Component {
               .set({
                 username: username,
                 email: email
-                /* lists: {
-                  whislistMovies: { 0: "empty" },
-                  seenMovies: { 0: "empty" },
-                  whislistSeries: { 0: "empty" },
-                  seenSeries: { 0: "empty" }
-                } */
               })
               .then(
                 console.log(

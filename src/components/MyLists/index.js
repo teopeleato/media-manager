@@ -24,9 +24,7 @@ export class MyLists extends Component {
   }
 
   componentWillMount = () => {
-    console.log("entro componentWillMount!!")
     const firstList = this.state.type
-    console.log("firstList: ", firstList)
     this._getLists(firstList)
 
     // Mantengo la pestaña activa al volver de la vista detalle
@@ -41,7 +39,6 @@ export class MyLists extends Component {
   _getLists(type) {
     this.setState({ listTitle: type })
     try {
-      console.log("type: ", type)
       // Vacío listado de pelis
       this.setState({
         movies: []
@@ -49,7 +46,6 @@ export class MyLists extends Component {
 
       const email = this.state.email
       const username = email.split("@")[0]
-      console.log("mostrando listas de: ", username)
       const refList = app
         .database()
         .ref(`users/` + username + `/lists/` + type + `/items/`)
@@ -75,8 +71,6 @@ export class MyLists extends Component {
   }
 
   render() {
-    console.log("mylist!!!!!    !!!  this.state.type:", this.state.type)
-
     return (
       <div>
         {/* <Header /> */}
