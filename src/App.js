@@ -23,11 +23,11 @@ class App extends Component {
       <div className="App">
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/detail/:id" component={Detail} />
+          <Route path="/detail/:id/:ismylists" component={Detail} />
           <Route exact path="/login" component={LogIn} />
           <Route exact path="/signup" component={SignUpContainer} />
           <Route exact path="/logout" component={LogOut} />
-          <Route exact path="/mylists" component={MyLists}/>
+          <Route exact path="/mylists/" component={MyLists} />
           <Route component={NotFound} />
         </Switch>
       </div>
@@ -36,3 +36,7 @@ class App extends Component {
 }
 
 export default App
+
+{
+  /* <Route exact path="/mylists/:listtype" component={MyLists} /> */
+}

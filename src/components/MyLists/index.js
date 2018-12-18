@@ -10,11 +10,9 @@ const API_KEY = "28b20f8"
 
 export class MyLists extends Component {
   state = {
-    type: "wishlistMovies",
+    /* type: "wishlistMovies", */
+    type: this.props.location.state.listtype,
     name: "Movies",
-    /* "seenMovies", "wishlistMovies", "seenSeries", "wishlistSeries" */
-    /* movies: [], */
-    // movies: window.sessionStorage.getItem("movie"),
     listTitle: "",
     isActiveMovies: "is-active",
     isActiveSeries: "",
@@ -30,6 +28,14 @@ export class MyLists extends Component {
     const firstList = this.state.type
     console.log("firstList: ", firstList)
     this._getLists(firstList)
+
+    // Mantengo la pestaña activa al volver de la vista detalle
+    if (this.state.type === "wishlistMovies") {
+      this.setState({ isActiveMovies: "is-active", isActiveSeries: "" })
+    }
+    if (this.state.type === "wishlistSeries") {
+      this.setState({ isActiveMovies: "", isActiveSeries: "is-active" })
+    }
   }
 
   _getLists(type) {
@@ -69,6 +75,8 @@ export class MyLists extends Component {
   }
 
   render() {
+    console.log("mylist!!!!!    !!!  this.state.type:", this.state.type)
+
     return (
       <div>
         {/* <Header /> */}
@@ -92,7 +100,7 @@ export class MyLists extends Component {
                   <span className="icon is-small">
                     <i className="fas fa-film" aria-hidden="true" />
                   </span>
-                  <span>{this.state.name}</span>
+                  <span>Movies</span>
                 </a>
               </li>
               <li className={this.state.isActiveSeries}>
@@ -110,7 +118,7 @@ export class MyLists extends Component {
                   <span className="icon is-small">
                     <i className="fas fa-tv" aria-hidden="true" />
                   </span>
-                  <span>{this.state.name}</span>
+                  <span>Series</span>
                 </a>
               </li>
             </ul>
@@ -122,7 +130,8 @@ export class MyLists extends Component {
         <MoviesList
           movies={this.state.movies}
           email={this.state.email}
-          isMyLists="true"
+          isMyLists="mylist"
+          listtype={this.state.type}
         />
         <footer className="footer footerDetail">
           <div className="content has-text-centered">

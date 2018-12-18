@@ -23,8 +23,15 @@ export class Header extends Component {
       content = (
         <div>
           <p>Hi {this.props.email}</p>
-          <Link to="/mylists">My lists</Link> -{" "}
-          <Link to="/logout">Log out</Link>
+          <Link
+            to={{
+              pathname: `${process.env.PUBLIC_URL}/mylists`,
+              state: { listtype: "wishlistMovies" }
+            }}
+          >
+            My lists
+          </Link>{" "}
+          - <Link to="/logout">Log out</Link>
         </div>
       )
     }
@@ -37,3 +44,7 @@ export class Header extends Component {
 }
 
 export default Header
+
+{
+  /* <Link to="/mylists/wishlistMovies">My lists</Link> -{" "} */
+}

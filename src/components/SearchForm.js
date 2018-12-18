@@ -143,7 +143,7 @@ export class SearchForm extends Component {
     }
 
     return (
-      <div className="container2">
+      <div className="container">
         <h1 className="title">Wishlist for popcorns</h1>
         <h2 className="subtitle">Movies & Series</h2>
         <form onSubmit={this._handleSubmit}>
@@ -209,7 +209,8 @@ export class SearchForm extends Component {
           role="navigation"
           aria-label="pagination"
         >
-          <ul className="pagination-list">
+          {/* <ul className="pagination-list"> */}
+          <ul className="pagination-list-changed">
             <li className={`${disabledFirst}`}>
               <button className="pagination-link" onClick={this._firstPage}>
                 1

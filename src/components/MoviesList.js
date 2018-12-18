@@ -17,14 +17,14 @@ export class MoviesList extends Component {
   }
 
   componentDidMount = () => {
-    if (this.props.isMyLists === "true") {
+    if (this.props.isMyLists === "mylist") {
       this.setState({ removeFromListButton: "" })
       this.setState({ addToListButton: "disableButton" })
     }
   }
 
   render() {
-    const { movies, email } = this.props
+    const { movies, email, listtype } = this.props
     return (
       <div id="moviesList">
         <div className="columns is-multiline is-mobile">
@@ -44,6 +44,8 @@ export class MoviesList extends Component {
                   removeFromListButton={this.state.removeFromListButton}
                   addToListButton={this.state.addToListButton}
                   movies={movies}
+                  isMyLists={this.state.isMyLists}
+                  listtype={listtype}
                 />
               </div>
             )

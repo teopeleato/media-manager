@@ -57,18 +57,15 @@ export class Movie extends Component {
         })
         .then(function() {
           // Miro si ya está en la lista o no
-          // console.log("arrayMovies: ", arrayMovies)
           exists = arrayMovies.indexOf(imdbID)
           console.log("exists: ", exists)
           if (exists === -1) {
             // Si no esta: la añado
             refList.push({ imdbID }, function(error) {
-              // ???????????
               if (error) {
                 console.log(error)
               } else {
                 console.log("Añadido correctamente el id: ", imdbID)
-                // console.log("{ imdbID }!!!!!: ", imdbID)
                 alert("Done! Now'" + title + "' is in your list.")
               }
             })
@@ -91,7 +88,6 @@ export class Movie extends Component {
     if (type === "movie") {
       listName = "wishlistMovies"
     }
-    console.log("remoooooooooooooove", imdbID, title, type, email)
     try {
       // Obtengo la referencia al listado de pelis
       const refList = app
@@ -105,7 +101,7 @@ export class Movie extends Component {
             console.log("eliminando el id: ", imdbID)
             child.ref.remove()
             console.log(movies)
-
+            window.location.reload()
             // Y lo elimino del array de peliculas
             var index = movies.findIndex(m => m.imdbID === imdbID)
             const movieToRemove = movies.splice(index, 1) // TO DO: refrescar la pagina tras eliminar peli...
@@ -117,11 +113,23 @@ export class Movie extends Component {
   }
 
   render() {
-    const { title, year, poster, imdbID } = this.props
+    let isMyLists = "search"
+    if (this.props.isMyLists === "mylist") {
+      isMyLists = "mylist"
+    }
+    const { title, year, poster, imdbID, listtype } = this.props
+
     return (
       <div>
         <div className="card-image">
-          <Link to={`/detail/${imdbID}`} className="card" title="Show details">
+          <Link
+            className="card"
+            title="Show details"
+            to={{
+              pathname: `/detail/${imdbID}/false`,
+              state: { ismylists: isMyLists, listtype: listtype }
+            }}
+          >
             <figure className="image">
               <img
                 onError={this._handleImageError}
@@ -135,9 +143,12 @@ export class Movie extends Component {
           <div className="media">
             <div className="media-content">
               <Link
-                to={`/detail/${imdbID}`}
                 className="card"
                 title="Show details"
+                to={{
+                  pathname: `/detail/${imdbID}/false`,
+                  state: { ismylists: isMyLists }
+                }}
               >
                 <p className="title is-size-6-mobile is-size-5-tablet is-size-5-desktop">
                   {title}
@@ -147,9 +158,12 @@ export class Movie extends Component {
                 {year}
               </div>
               <Link
-                to={`/detail/${imdbID}`}
                 className="card"
                 title="Show details"
+                to={{
+                  pathname: `/detail/${imdbID}/false`,
+                  state: { ismylists: isMyLists }
+                }}
               >
                 <button
                   className="button is-info is-outlined is-small icon-left"

@@ -6,10 +6,6 @@ import imgDefault from "../assets/img-default.png"
 const API_KEY = "28b20f8"
 
 export class Detail extends Component {
-  /* static propTypes = {
-    id: PropTypes.string
-  } */
-
   static propTypes = {
     match: PropTypes.shape({
       params: PropTypes.object,
@@ -64,6 +60,10 @@ export class Detail extends Component {
       Poster = this.props.defaultPlot
     }
 
+    const ismylists = this.props.location.state.ismylists
+    const listtype = this.props.location.state.listtype
+    console.log("detail!!!! listtype: ", listtype)
+
     return (
       <div>
         <section className="hero bottomMargin24">
@@ -102,7 +102,8 @@ export class Detail extends Component {
               <div className="tile is-parent is-vertical">
                 <article className="tile is-child notification img-detail">
                   <div className="card-image">
-                    <figure className="image">
+                    {/* <figure className="image"> */}
+                    <figure className="">
                       <img src={Poster} alt={Title} />
                     </figure>
                   </div>
@@ -187,9 +188,7 @@ export class Detail extends Component {
 
         <footer className="footer footerDetail">
           <div className="content has-text-centered">
-            <p>
-              <ButtonBackToHome />
-            </p>
+            <ButtonBackToHome ismylists={ismylists} listtype={listtype} />
           </div>
         </footer>
       </div>
